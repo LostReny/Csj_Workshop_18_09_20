@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb; //variavel do tipo componente rigdbody 2D
 
+    public Animator anim;  
+    
     bool estaPulando; //variavel do tipo verdadeiro ou falso
 
 
@@ -40,11 +42,31 @@ public class Player : MonoBehaviour
         if (movimento > 0)
         {
             transform.eulerAngles = new Vector2(0f, 0f);
+
+            if(estaPulando == false)
+            {
+                anim.SetInteger("transition", 1);
+            }
+            
         }
 
         if (movimento < 0)
         {
             transform.eulerAngles = new Vector2(0f, 180f);
+
+            if(estaPulando == false)
+            {
+                anim.SetInteger("transition", 1);
+            }
+            
+        }
+
+        if(movimento == 0)
+        {
+             if(estaPulando == false)
+            {
+                anim.SetInteger("transition", 0);
+            }
         }
 
     }
@@ -55,6 +77,7 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, forcaPulo), ForceMode2D.Impulse);
             estaPulando = true;
+            anim.SetInteger("transition", 2);
         }
     }
 
