@@ -90,4 +90,21 @@ public class Player : MonoBehaviour
             estaPulando = false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+        if(collision.CompareTag("enemyBody"))
+        {
+            //perde vida
+            Debug.Log("perdeu vida");
+        }
+
+        if(collision.CompareTag("enemyHead"))
+        {
+            rb.AddForce(new Vector2(0f, forcaPulo), ForceMode2D.Impulse);
+            Destroy(collision.transform.parent.gameObject);
+        }
+    }
+
+
 }
